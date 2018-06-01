@@ -6,21 +6,26 @@
     <artifactId>spring-skeleton</artifactId>
     <name>Spring Flow Application Skeleton</name>
     <version>1.0-SNAPSHOT</version>
-    <packaging>war</packaging>
+    <packaging>jar</packaging>
+
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.0.2.RELEASE</version>
+        <relativePath/> <!-- lookup parent from repository -->
+    </parent>
 
     <properties>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <failOnMissingWebXml>false</failOnMissingWebXml>
 
         <!-- Place for frontend stuff in Spring Boot apps to META-INF/resources -->
         <webapp.directory>src/main/resources/META-INF/resources</webapp.directory>
 
         <!-- Dependencies -->
         <vaadin.version>10.0.0.rc1</vaadin.version>
-        <spring-boot.version>2.0.2.RELEASE</spring-boot.version>
     </properties>
 
     <pluginRepositories>
@@ -47,13 +52,6 @@
                 <groupId>com.vaadin</groupId>
                 <artifactId>vaadin-bom</artifactId>
                 <version>${vaadin.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-            <dependency>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-dependencies</artifactId>
-                <version>${spring-boot.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -87,27 +85,10 @@
     </dependencies>
 
     <build>
-        <pluginManagement>
-            <plugins>
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-war-plugin</artifactId>
-                    <version>3.1.0</version>
-                    <configuration>
-                        <packagingExcludes>
-                            %regex[WEB-INF/lib/slf4j-simple.*.jar],
-                            %regex[WEB-INF/lib/tomcat.*.jar]
-                        </packagingExcludes>
-                    </configuration>
-                </plugin>
-            </plugins>
-        </pluginManagement>
-
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
-                <version>${spring-boot.version}</version>
             </plugin>
 
             <plugin>
@@ -166,7 +147,6 @@
                     <plugin>
                         <groupId>org.springframework.boot</groupId>
                         <artifactId>spring-boot-maven-plugin</artifactId>
-                        <version>${spring-boot.version}</version>
                         <configuration>
                             <jvmArguments>-Dvaadin.productionMode</jvmArguments>
                         </configuration>
